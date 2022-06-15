@@ -5,9 +5,9 @@ spring:
   jackson:
     time-zone: Africa/Abidjan
   datasource:
-    url: jdbc:mysql://localhost:3306/vc
-    username: miron
-    password: miron
+    url:
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     open-in-view: false
