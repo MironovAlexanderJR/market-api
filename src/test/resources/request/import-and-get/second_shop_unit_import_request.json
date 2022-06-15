@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "type": "OFFER",
+      "name": "Философия Java",
+      "id": "96c3b21f-3841-4fca-913c-fa700046b6c2",
+      "parentId": "96c3b21f-3841-4fca-913c-fa700046b6c1",
+      "price": 4999
+    }
+  ],
+  "updateDate": "2022-01-02T21:00:00.000Z"
+}

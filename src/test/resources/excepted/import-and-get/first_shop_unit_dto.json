@@ -1,0 +1,19 @@
+{
+  "id": "df634f0e-0815-41f9-93d1-301f503b5991",
+  "name": "Товары",
+  "type": "CATEGORY",
+  "parentId": null,
+  "date": "2022-01-01T20:00:00.000Z",
+  "price": null,
+  "children": [
+    {
+      "id": "96c3b21f-3841-4fca-913c-fa700046b6c1",
+      "name": "Книги",
+      "type": "CATEGORY",
+      "parentId": "df634f0e-0815-41f9-93d1-301f503b5991",
+      "date": "2022-01-01T20:00:00.000Z",
+      "price": null,
+      "children": null
+    }
+  ]
+}

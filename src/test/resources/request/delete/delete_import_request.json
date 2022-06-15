@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "type": "CATEGORY",
+      "name": "Товары",
+      "id": "df634f0e-0815-41f9-93d1-301f503b5991",
+      "parentId": ""
+    },
+    {
+      "type": "CATEGORY",
+      "name": "Книги",
+      "id": "96c3b21f-3841-4fca-913c-fa700046b6c1",
+      "parentId": "df634f0e-0815-41f9-93d1-301f503b5991"
+    },
+    {
+      "type": "OFFER",
+      "name": "Философия Java",
+      "id": "96c3b21f-3841-4fca-913c-fa700046b6c2",
+      "parentId": "96c3b21f-3841-4fca-913c-fa700046b6c1",
+      "price": 4999
+    },
+    {
+      "type": "OFFER",
+      "name": "java concurrency на практике",
+      "id": "96c3b21f-3841-4fca-913c-fa700046b6c3",
+      "parentId": "96c3b21f-3841-4fca-913c-fa700046b6c1",
+      "price": 6999
+    }
+  ],
+  "updateDate": "2022-01-01T20:00:00.000Z"
+}
