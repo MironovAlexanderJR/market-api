@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import ru.mironov.marketapi.domain.entity.ShopUnitType;
@@ -18,7 +19,7 @@ public class ShopUnitImport {
     @NotBlank
     UUID id;
 
-    @NotBlank
+    @NotNull
     String name;
 
     UUID parentId;

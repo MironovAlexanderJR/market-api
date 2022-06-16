@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "98883e8f-0507-482f-bce2-2fb306cf6483",
+      "name": "Samson 70\" LED UHD Smart",
+      "date": "2022-02-03T12:00:00.000Z",
+      "parentId": "1cc0129a-2bfe-474c-9ee6-d435bf5fc8f2",
+      "price": 32999,
+      "type": "OFFER"
+    },
+    {
+      "id": "74b81fda-9cdc-4b63-8927-c978afed5cf4",
+      "name": "Phyllis 50\" LED UHD Smarter",
+      "date": "2022-02-03T12:00:00.000Z",
+      "parentId": "1cc0129a-2bfe-474c-9ee6-d435bf5fc8f2",
+      "price": 49999,
+      "type": "OFFER"
+    }
+  ]
+}

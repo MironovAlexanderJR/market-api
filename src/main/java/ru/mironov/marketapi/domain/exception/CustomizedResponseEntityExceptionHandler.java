@@ -3,6 +3,8 @@ package ru.mironov.marketapi.domain.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNullApi;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,7 +33,21 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
             MissingServletRequestParameterException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
 
-        CustomException customException = new CustomException(HttpStatus.BAD_REQUEST.value(), "Validation Failed");
-        return new ResponseEntity<>(customException, HttpStatus.BAD_REQUEST);
+        CustomException customException = new CustomException(status.value(), ex.getMessage());
+        return new ResponseEntity<>(customException, status);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+        CustomException customException = new CustomException(status.value(), "Validation Failed");
+        return new ResponseEntity<>(customException, status);
+    }
+
+    @ExceptionHandler({ RuntimeException.class })
+    public ResponseEntity<Object> handleAll(RuntimeException ex, WebRequest request) {
+
+        CustomException customException = new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+        return new ResponseEntity<>(customException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

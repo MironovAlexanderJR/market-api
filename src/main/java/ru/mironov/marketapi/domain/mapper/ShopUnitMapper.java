@@ -3,7 +3,9 @@ package ru.mironov.marketapi.domain.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 import ru.mironov.marketapi.domain.dto.ShopUnitDto;
 import ru.mironov.marketapi.domain.dto.ShopUnitImport;
 import ru.mironov.marketapi.domain.entity.ShopUnit;
@@ -11,7 +13,7 @@ import ru.mironov.marketapi.domain.entity.ShopUnit;
 @Component
 public class ShopUnitMapper {
 
-    public ShopUnit fromShopUnitImport(ShopUnitImport source) {
+    public ShopUnit fromShopUnitImport(@Valid ShopUnitImport source) {
         if ( source == null ) {
             return null;
         }

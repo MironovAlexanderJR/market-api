@@ -3,27 +3,40 @@ package ru.mironov.marketapi.service;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.mironov.marketapi.domain.dto.ShopUnitImportRequest;
+import ru.mironov.marketapi.domain.dto.ShopUnitStatisticResponse;
 import ru.mironov.marketapi.domain.entity.ShopUnit;
 import ru.mironov.marketapi.domain.entity.ShopUnitType;
 import ru.mironov.marketapi.domain.exception.NotFoundException;
+import ru.mironov.marketapi.domain.exception.ValidationFailedException;
 import ru.mironov.marketapi.domain.mapper.ShopUnitMapper;
+import ru.mironov.marketapi.domain.mapper.ShopUnitStatisticUnitMapper;
 import ru.mironov.marketapi.repository.ShopUnitRepo;
 
 @Service
+@Primary
 @RequiredArgsConstructor
-public class ShopUnitServiceImpl {
+public class ShopUnitService {
 
     private final ShopUnitRepo shopUnitRepo;
     private final ShopUnitMapper shopUnitMapper;
+    private final ShopUnitStatisticUnitMapper shopUnitStatisticUnitMapper;
 
     @Transactional
     public void importingNewProductsAndOrCategories(ShopUnitImportRequest shopUnitImportRequest) {
+        if (shopUnitImportRequest.getItems().size() < 1)
+            throw new ValidationFailedException();
+
         for (int i = 0; i < shopUnitImportRequest.getItems().size(); i++) {
             ShopUnit shopUnit = shopUnitMapper.fromShopUnitImport(shopUnitImportRequest.getItems().get(i));
+            if (shopUnit.getName() == null || shopUnit.getId() == null)
+                throw new ValidationFailedException();
+
             if (shopUnit.getParentId() == null) {
                 shopUnit.setDate(ZonedDateTime.parse(shopUnitImportRequest.getUpdateDate()));
 
@@ -55,6 +68,23 @@ public class ShopUnitServiceImpl {
         ShopUnit shopUnit = shopUnitRepo.findById(id).orElseThrow(NotFoundException::new);
         setAveragePrice(shopUnit);
         return shopUnit;
+    }
+
+    public ShopUnitStatisticResponse findAllByDate(ZonedDateTime date) {
+
+        List<ShopUnit> shopUnitList = shopUnitRepo.findAllByDateAndType(date, ShopUnitType.OFFER);
+
+        if (shopUnitList.size() < 1) {
+            throw new NotFoundException();
+        }
+
+        return ShopUnitStatisticResponse
+                .builder()
+                .items(shopUnitList.stream()
+                        .map(shopUnitStatisticUnitMapper::fromShopUnit)
+                        .collect(Collectors.toList()))
+                .build();
+
     }
 
     private int[] setAveragePrice(ShopUnit shopUnit) {
