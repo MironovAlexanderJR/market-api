@@ -99,6 +99,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>market-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

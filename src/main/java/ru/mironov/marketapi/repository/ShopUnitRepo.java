@@ -1,6 +1,5 @@
 package ru.mironov.marketapi.repository;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +10,6 @@ import ru.mironov.marketapi.domain.entity.ShopUnitType;
 @Repository
 public interface ShopUnitRepo extends JpaRepository<ShopUnit, UUID> {
 
-    List<ShopUnit> findAllByDateAndType(ZonedDateTime zonedDateTime, ShopUnitType shopUnitType);
+    List<ShopUnit> findAllByType(ShopUnitType shopUnitTyp);
 
 }

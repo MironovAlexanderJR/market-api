@@ -1,6 +1,7 @@
 package ru.mironov.marketapi.service;
 
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -70,21 +71,27 @@ public class ShopUnitService {
         return shopUnit;
     }
 
-    public ShopUnitStatisticResponse findAllByDate(ZonedDateTime date) {
+    public ShopUnitStatisticResponse findAllByDateLast24HoursAge(ZonedDateTime date) {
 
-        List<ShopUnit> shopUnitList = shopUnitRepo.findAllByDateAndType(date, ShopUnitType.OFFER);
+        ZonedDateTime the24HoursAgo = date.minus(25, ChronoUnit.HOURS);
 
-        if (shopUnitList.size() < 1) {
+        List<ShopUnit> shopUnitList = shopUnitRepo.findAllByType(ShopUnitType.OFFER);
+
+        ShopUnitStatisticResponse shopUnitStatisticResponse =
+                ShopUnitStatisticResponse
+                        .builder()
+                        .items(shopUnitList.stream()
+                                .filter(shopUnit -> shopUnit.getDate().isBefore(date) && shopUnit.getDate().isAfter(the24HoursAgo)
+                                        || shopUnit.getDate().isEqual(date))
+                                .map(shopUnitStatisticUnitMapper::fromShopUnit)
+                                .collect(Collectors.toList()))
+                        .build();
+
+        if (shopUnitStatisticResponse.getItems().size() < 1) {
             throw new NotFoundException();
         }
 
-        return ShopUnitStatisticResponse
-                .builder()
-                .items(shopUnitList.stream()
-                        .map(shopUnitStatisticUnitMapper::fromShopUnit)
-                        .collect(Collectors.toList()))
-                .build();
-
+        return shopUnitStatisticResponse;
     }
 
     private int[] setAveragePrice(ShopUnit shopUnit) {

@@ -20,7 +20,7 @@ import ru.mironov.marketapi.service.ShopUnitService;
 
 @RestController
 @RequiredArgsConstructor
-public class ShoUnitController {
+public class ShopUnitController {
 
     private final ShopUnitService shopUnitService;
     private final ShopUnitMapper shopUnitMapper;
@@ -43,6 +43,6 @@ public class ShoUnitController {
 
     @GetMapping("/sales")
     public ShopUnitStatisticResponse sales(@RequestParam("date") String date) {
-        return shopUnitService.findAllByDate(ZonedDateTime.parse(date));
+        return shopUnitService.findAllByDateLast24HoursAge(ZonedDateTime.parse(date));
     }
 }
