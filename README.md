@@ -1,6 +1,9 @@
 # market-api
 spring boot rest api 
 
+Api url: https://void-2086.usr.yandex-academy.ru
+Api documentation: https://void-2086.usr.yandex-academy.ru/swagger-ui/index.html
+
 To create a docker image and run it:
 ```
 git clone https://github.com/MironovAlexanderJR/market-api
