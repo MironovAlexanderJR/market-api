@@ -1,10 +1,12 @@
 # market-api
-spring boot rest api 
+***
+Вступительное задание в Летнюю Школу Бэкенд Разработки Яндекса 2022
+***
 
-Api url: https://void-2086.usr.yandex-academy.ru
-Api documentation: https://void-2086.usr.yandex-academy.ru/swagger-ui/index.html
+* **Api url:** https://void-2086.usr.yandex-academy.ru
+* **Api documentation:** https://void-2086.usr.yandex-academy.ru/swagger-ui/index.html
 
-To create a docker image and run it:
+## To create a docker image and run it:
 ```
 git clone https://github.com/MironovAlexanderJR/market-api
 cd market-api
