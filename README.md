@@ -13,7 +13,7 @@ docker run --name market-api-container
     -e SPRING_DATASOURCE_PASSWORD=your_mysql_database_password 
     -e SPRING_TEST_DATASOURCE_URL=your_test_mysql_database_name 
     -e SPRING_TEST_DATASOURCE_USERNAME=your_test_mysql_database_username
-    -e SPRING_TEST_DATASOURCE_PASSWORD=your_test_mysql_database_password -p 8080:8080 market-api
+    -e SPRING_TEST_DATASOURCE_PASSWORD=your_test_mysql_database_password -p 80:80 market-api
 ```
 
-Documentation address(Swagger): https://localhost:8080/swagger-ui.html
+Documentation address(Swagger): https://localhost/swagger-ui.html
